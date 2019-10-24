@@ -26,12 +26,12 @@ function MemberForm() {
       // await sendToServer(values);
       console.log(`${values.title}`);
       const input = { title: values.title };
-      // const result = await API.graphql(
-      //   graphqlOperation(createMember, { input })
-      // );
+      const result = await API.graphql(
+        graphqlOperation(createMember, { input })
+      );
 
-      // const newMember = result.data.createMember;
-      // console.log(newMember.title);
+      const newMember = result.data.createMember;
+      console.log(newMember.title);
 
       // setMember(prevState => {
       //   // Object.assign would also work
@@ -48,6 +48,7 @@ function MemberForm() {
 
   return (
     <Form>
+      <h4>Add New Member</h4>
       <label>
         Title: <InputField field="title" />
       </label>

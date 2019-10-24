@@ -5,6 +5,15 @@ export const onCreateMember = `subscription OnCreateMember {
   onCreateMember {
     id
     title
+    events {
+      items {
+        id
+        title
+        start_time
+        end_time
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -12,6 +21,15 @@ export const onUpdateMember = `subscription OnUpdateMember {
   onUpdateMember {
     id
     title
+    events {
+      items {
+        id
+        title
+        start_time
+        end_time
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -19,6 +37,15 @@ export const onDeleteMember = `subscription OnDeleteMember {
   onDeleteMember {
     id
     title
+    events {
+      items {
+        id
+        title
+        start_time
+        end_time
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -29,6 +56,9 @@ export const onCreateEvent = `subscription OnCreateEvent {
     group {
       id
       title
+      events {
+        nextToken
+      }
     }
     start_time
     end_time
@@ -42,6 +72,9 @@ export const onUpdateEvent = `subscription OnUpdateEvent {
     group {
       id
       title
+      events {
+        nextToken
+      }
     }
     start_time
     end_time
@@ -55,6 +88,9 @@ export const onDeleteEvent = `subscription OnDeleteEvent {
     group {
       id
       title
+      events {
+        nextToken
+      }
     }
     start_time
     end_time

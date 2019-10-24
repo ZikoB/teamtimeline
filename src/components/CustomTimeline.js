@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 
 import Timeline from "react-calendar-timeline";
-
+import randomColor from "randomcolor";
 import generateFakeData from "../generate-fake-data";
 
 var keys = {
@@ -18,10 +18,8 @@ var keys = {
   groupLabelKey: "title",
 };
 
-const CustomTimeline = ({ groups }) => {
-  // const [groups, setGroups] = useState(generateFakeData().groups);
-  console.log(groups);
-  const [items, setItems] = useState(generateFakeData().items);
+const CustomTimeline = ({ groups, events }) => {
+  // const [items, setItems] = useState(events);
   const [defaultTimeStart, setDefaultTimeStart] = useState(
     moment()
       .startOf("day")
@@ -33,6 +31,26 @@ const CustomTimeline = ({ groups }) => {
       .add(1, "day")
       .toDate()
   );
+
+  let randomSeed = Math.floor(Math.random() * 1000);
+
+  // console.log(events);
+
+  let prItems = [];
+  // for (let i = 0; i < events.length; i++) {
+  //   prItems.push({
+  //     color: randomColor({ luminosity: "dark", seed: randomSeed + i }),
+  //     // id: i + "",
+  //     title: events.title,
+  //     start: Date.parse(events[i].start_time),
+  //     end: Date.parse(events[i].end_time),
+  //     group: events.group[i].id,
+  //   });
+  // }
+
+  console.log(generateFakeData().items);
+  console.log(prItems);
+  console.log(events);
 
   const itemRenderer = ({
     item,
@@ -85,43 +103,43 @@ const CustomTimeline = ({ groups }) => {
     );
   };
 
-  const handleItemMove = (itemId, dragTime, newGroupOrder) => {
-    const group = groups[newGroupOrder];
+  // const handleItemMove = (itemId, dragTime, newGroupOrder) => {
+  //   const group = groups[newGroupOrder];
 
-    setItems(
-      items.map(item =>
-        item.id === itemId
-          ? Object.assign({}, item, {
-              start: dragTime,
-              end: dragTime + (item.end - item.start),
-              group: group.id,
-            })
-          : item
-      )
-    );
+  //   setItems(
+  //     items.map(item =>
+  //       item.id === itemId
+  //         ? Object.assign({}, item, {
+  //             start: dragTime,
+  //             end: dragTime + (item.end - item.start),
+  //             group: group.id,
+  //           })
+  //         : item
+  //     )
+  //   );
 
-    console.log("Moved", itemId, dragTime, newGroupOrder);
-  };
+  //   console.log("Moved", itemId, dragTime, newGroupOrder);
+  // };
 
-  const handleItemResize = (itemId, time, edge) => {
-    setItems(
-      items.map(item =>
-        item.id === itemId
-          ? Object.assign({}, item, {
-              start: edge === "left" ? time : item.start,
-              end: edge === "left" ? item.end : time,
-            })
-          : item
-      )
-    );
+  // const handleItemResize = (itemId, time, edge) => {
+  //   setItems(
+  //     items.map(item =>
+  //       item.id === itemId
+  //         ? Object.assign({}, item, {
+  //             start: edge === "left" ? time : item.start,
+  //             end: edge === "left" ? item.end : time,
+  //           })
+  //         : item
+  //     )
+  //   );
 
-    console.log("Resized", itemId, time, edge);
-  };
+  //   console.log("Resized", itemId, time, edge);
+  // };
 
   return (
     <Timeline
       groups={groups}
-      items={items}
+      items={prItems}
       keys={keys}
       itemTouchSendsClick={false}
       stackItems
@@ -132,8 +150,8 @@ const CustomTimeline = ({ groups }) => {
       defaultTimeStart={defaultTimeStart}
       defaultTimeEnd={defaultTimeEnd}
       itemRenderer={itemRenderer}
-      onItemMove={handleItemMove}
-      onItemResize={handleItemResize}
+      // onItemMove={handleItemMove}
+      // onItemResize={handleItemResize}
     />
   );
 };

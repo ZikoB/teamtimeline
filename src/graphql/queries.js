@@ -5,6 +5,15 @@ export const getMember = `query GetMember($id: ID!) {
   getMember(id: $id) {
     id
     title
+    events {
+      items {
+        id
+        title
+        start_time
+        end_time
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -17,6 +26,9 @@ export const listMembers = `query ListMembers(
     items {
       id
       title
+      events {
+        nextToken
+      }
     }
     nextToken
   }
@@ -29,6 +41,9 @@ export const getEvent = `query GetEvent($id: ID!) {
     group {
       id
       title
+      events {
+        nextToken
+      }
     }
     start_time
     end_time

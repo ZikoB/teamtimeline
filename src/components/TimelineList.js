@@ -3,6 +3,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listMembers, listEvents } from "../graphql/queries";
 import { deleteMember } from "../graphql/mutations";
 
+import EventForm from "./EventForm";
 import CustomTimeline from "./CustomTimeline";
 
 const TimelineList = () => {
@@ -33,20 +34,31 @@ const TimelineList = () => {
   useEffect(() => {
     async function fetchMembers() {
       const result = await API.graphql(graphqlOperation(listMembers));
-      setMembers(result.data.listMembers.items);
-      console.log(result.data);
+      let memberList = result.data.listMembers.items;
+      setMembers(memberList);
     }
 
-    // async function fetchEvents() {
-    //   const result = await API.graphql(graphqlOperation(listEvents));
-    //   console.log(result);
-    // }
+    async function fetchEvents() {
+      const result = await API.graphql(graphqlOperation(listEvents));
+      let eventList = result.data.listEvents.items;
+      let eventsListTransform = [];
+      for (let i = 0; i < eventList.length; i++) {
+        const startDate = Date.parse(eventList[i].start_time);
+        const endDate = Date.parse(eventList[i].end_time);
+        eventsListTransform.push
+      }
+      setEvents(eventList);
+
+      console.log(eventList);
+    }
+
     fetchMembers();
-    // fetchEvents();
+    fetchEvents();
   }, []);
 
   return (
     <div>
+      <h4>Delete Member</h4>
       {members.map(member => {
         return (
           <div key={member.id} style={{ display: "flex" }}>
@@ -61,8 +73,8 @@ const TimelineList = () => {
           </div>
         );
       })}
-
-      <CustomTimeline groups={members} />
+      <EventForm groups={members} />
+      <CustomTimeline groups={members} events={events} />
     </div>
   );
 };

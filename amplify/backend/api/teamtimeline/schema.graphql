@@ -1,11 +1,12 @@
 type Member @model @auth(rules: [{ allow: groups, groups: ["Admin"] }]) {
   id: ID!
   title: String!
+  events: [Event] @connection
 }
 type Event @model @auth(rules: [{ allow: groups, groups: ["Admin"] }]) {
   id: ID!
   title: String!
   group: Member @connection
-  start_time: Int!
-  end_time: Int!
+  start_time: String!
+  end_time: String!
 }
