@@ -1,0 +1,26 @@
+{
+	"auth": {
+		"teamtimelinef6a78f24": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	},
+	"api": {
+		"teamtimeline": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authteamtimelinef6a78f24"
+						}
+					}
+				}
+			}
+		}
+	}
+}

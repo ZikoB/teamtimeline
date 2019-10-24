@@ -1,0 +1,19 @@
+{
+    "react": {
+        "awscloudformation": {
+            "AuthRoleName": "teamtimeline-react-20191022213733-authRole",
+            "UnauthRoleArn": "arn:aws:iam::808172031500:role/teamtimeline-react-20191022213733-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::808172031500:role/teamtimeline-react-20191022213733-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "teamtimeline-react-20191022213733-deployment",
+            "UnauthRoleName": "teamtimeline-react-20191022213733-unauthRole",
+            "StackName": "teamtimeline-react-20191022213733",
+            "StackId": "arn:aws:cloudformation:us-east-2:808172031500:stack/teamtimeline-react-20191022213733/111f9250-f53e-11e9-9a3c-0a768148c3d2"
+        },
+        "categories": {
+            "auth": {
+                "teamtimelinef6a78f24": {}
+            }
+        }
+    }
+}
