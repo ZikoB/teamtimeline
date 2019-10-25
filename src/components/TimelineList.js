@@ -3,6 +3,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import { listMembers, listEvents } from "../graphql/queries";
 import { deleteMember } from "../graphql/mutations";
 
+import randomColor from "randomcolor";
 import EventForm from "./EventForm";
 import CustomTimeline from "./CustomTimeline";
 
@@ -42,14 +43,28 @@ const TimelineList = () => {
       const result = await API.graphql(graphqlOperation(listEvents));
       let eventList = result.data.listEvents.items;
       let eventsListTransform = [];
+      let randomSeed = Math.floor(Math.random() * 1000);
+
       for (let i = 0; i < eventList.length; i++) {
         const startDate = Date.parse(eventList[i].start_time);
         const endDate = Date.parse(eventList[i].end_time);
-        eventsListTransform.push
+        eventsListTransform.push({
+          start: startDate,
+          end: endDate,
+          id: eventList[i].id,
+          group: eventList[i].group.id,
+          title: eventList[i].title,
+          bgColor: randomColor({
+            luminosity: "light",
+            seed: randomSeed + i,
+            format: "rgba",
+            alpha: 0.6,
+          }),
+        });
       }
-      setEvents(eventList);
+      setEvents(eventsListTransform);
 
-      console.log(eventList);
+      console.log(eventsListTransform);
     }
 
     fetchMembers();

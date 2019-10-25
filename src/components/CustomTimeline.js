@@ -32,6 +32,16 @@ const CustomTimeline = ({ groups, events }) => {
       .toDate()
   );
 
+  let items;
+
+  if (!Array.isArray(events) || !events.length) {
+    items = [];
+  } else {
+    items = events;
+  }
+
+  console.log(events);
+
   let randomSeed = Math.floor(Math.random() * 1000);
 
   // console.log(events);
@@ -139,7 +149,7 @@ const CustomTimeline = ({ groups, events }) => {
   return (
     <Timeline
       groups={groups}
-      items={prItems}
+      items={events}
       keys={keys}
       itemTouchSendsClick={false}
       stackItems
