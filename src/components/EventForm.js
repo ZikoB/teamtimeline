@@ -21,7 +21,7 @@ function EventForm({ groups }) {
   let memberListArray = [];
 
   groups.forEach(function(item, key) {
-    memberListArray.push(item.id);
+    memberListArray.push(item);
   });
 
   // Use the useForm hook to create a form instance

@@ -63,8 +63,8 @@ function SelectField(props) {
       <select {...rest} value={value} onChange={handleSelectChange}>
         <option disabled value="" />
         {options.map(option => (
-          <option key={option} value={option}>
-            {option}
+          <option key={option.id} value={option.id}>
+            {option.title}
           </option>
         ))}
       </select>{" "}
